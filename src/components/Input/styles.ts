@@ -25,5 +25,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 16,
     fontSize: 16,
+  },
+  error: {
+    fontSize: 14,
+    marginTop: 7,
+    color: "#DC1637"
   }
 })
