@@ -7,56 +7,53 @@ import { useRef } from "react";
 import { sytles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 
-export function FormStepOne() {
+export function FormStepTwo() {
   const { navigate } = useNavigation();
+
   const { control, handleSubmit, formState: { errors } } = useForm();
-  const emailRef = useRef<TextInput>(null);
+  const phonelRef = useRef<TextInput>(null);
 
 
   function handleNextStep(data: any) {
-    navigate("formStepTwo")
+    navigate('formStepThree')
   }
 
   return (
     <View style={sytles.container}>
       <Text style={sytles.title}>
-        Criar sua conta
+        Suas informações
       </Text>
 
       <Input
-        error={errors.name?.message}
-        icon="user"
+        error={errors.birth?.message}
+        icon="calendar"
         formProps={{
           control,
-          name: "name",
+          name: "birth",
           rules: {
-            required: "Nome é obrigatório."
+            required: "Data de nascimento é obrigatório."
           }
         }}
         inputProps={{
-          placeholder: "Nome",
-          onSubmitEditing: () => emailRef.current?.focus(),
+          placeholder: "Data de nascimento",
+          onSubmitEditing: () => phonelRef.current?.focus(),
           returnKeyType: "next"
         }}
       />
 
       <Input
-        ref={emailRef}
-        error={errors.email?.message}
-        icon="mail"
+        ref={phonelRef}
+        error={errors.phone?.message}
+        icon="phone"
         formProps={{
           control,
-          name: "email",
+          name: "phone",
           rules: {
-            required: "E-mail é obrigatório",
-            pattern: {
-              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
-              message: "E-mail inválido"
-            }
+            required: "Telefone é obrigatório",
           }
         }}
         inputProps={{
-          placeholder: "E-mail",
+          placeholder: "Telefone",
           onSubmitEditing: handleSubmit(handleNextStep)
         }}
       />
