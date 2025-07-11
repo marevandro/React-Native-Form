@@ -31,7 +31,11 @@ export function FormStepTwo() {
           control,
           name: "birth",
           rules: {
-            required: "Data de nascimento é obrigatório."
+            required: "Data de nascimento é obrigatório.",
+            pattern: {
+              value: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+              message: "Data de nascimento inválida."
+            }
           }
         }}
         inputProps={{
@@ -50,6 +54,10 @@ export function FormStepTwo() {
           name: "phone",
           rules: {
             required: "Telefone é obrigatório",
+            pattern: {
+              value: /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/,
+              message: "Telefone inválido."
+            }
           }
         }}
         inputProps={{

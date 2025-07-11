@@ -7,14 +7,19 @@ import { useRef } from "react";
 import { sytles } from "./styles";
 
 export function FormStepThree() {
-  const { control, handleSubmit, formState: { errors } } = useForm();
+  const { control, handleSubmit, formState: { errors }, getValues } = useForm();
   const passwordConfirmationRef = useRef<TextInput>(null);
 
 
   function handleNextStep(data: any) {
     console.log(data);
     console.log('Chegando aqui');
+  }
 
+  function validationPasswordConfirmation(passwordConfirmation: string) {
+    const { password } = getValues();
+
+    return password === passwordConfirmation || "As senhas devem ser iguais."
   }
 
   return (
@@ -30,7 +35,11 @@ export function FormStepThree() {
           control,
           name: "password",
           rules: {
-            required: "Senha é obrigatório."
+            required: "Senha é obrigatório.",
+            minLength: {
+              value: 6,
+              message: "A senha deve ter pelo menos 6 dígitos."
+            }
           }
         }}
         inputProps={{
@@ -50,6 +59,7 @@ export function FormStepThree() {
           name: "passwordConfirmation",
           rules: {
             required: "Confirme a senha.",
+            validate: validationPasswordConfirmation
           }
         }}
         inputProps={{
