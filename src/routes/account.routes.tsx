@@ -10,7 +10,7 @@ const { Navigator, Screen } = createNativeStackNavigator();
 
 export function AccountRoutes() {
   return (
-    <Navigator screenOptions={{ headerShown: false }}>
+    <Navigator screenOptions={{ headerShown: false, animation: "none" }}>
       <Screen name="formStepOne" component={FormStepOne} />
       <Screen name="formStepTwo" component={FormStepTwo} />
       <Screen name="formStepThree" component={FormStepThree} />
