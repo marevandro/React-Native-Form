@@ -3,25 +3,21 @@ import { useRef } from "react";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Progress } from "../../components/Progress";
-import { useAccountForm } from "../../hooks/useAccountForm";
-import { AccountProps } from "../../contexts/AccountFormContext";
 
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 
 import { sytles } from "./styles";
+import { AccountProps } from "../../@types/account.types";
 
 export function FormStepTwo() {
-  const { updateFormData } = useAccountForm();
-
   const { navigate } = useNavigation();
 
-  const { control, handleSubmit, formState: { errors } } = useForm<AccountProps>();
+  const { control, handleSubmit, formState: { errors } } = useFormContext<AccountProps>();
   const phonelRef = useRef<TextInput>(null);
 
 
-  function handleNextStep(data: AccountProps) {
-    updateFormData(data);
+  function handleNextStep() {
     navigate('formStepThree')
   }
 
