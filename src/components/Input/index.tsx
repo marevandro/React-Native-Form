@@ -7,7 +7,7 @@ import clsx from "clsx";
 import { styles } from "./styles";
 
 type Props = {
-  error: string;
+  error?: string;
   icon: keyof typeof Feather.glyphMap;
   formProps: UseControllerProps;
   inputProps: TextInputProps;

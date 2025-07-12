@@ -1,19 +1,25 @@
 import { Text, TextInput, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { useForm } from "react-hook-form";
 import { useRef } from "react";
 
 import { sytles } from "./styles";
+import { useAccountForm } from "../../hooks/useAccountForm";
+import { AccountProps } from "../../contexts/AccountFormContext";
+import { Progress } from "../../components/Progress";
 
 export function FormStepThree() {
-  const { control, handleSubmit, formState: { errors }, getValues } = useForm();
+  const { navigate } = useNavigation()
+  const { updateFormData } = useAccountForm();
+  const { control, handleSubmit, formState: { errors }, getValues } = useForm<AccountProps>();
   const passwordConfirmationRef = useRef<TextInput>(null);
 
 
-  function handleNextStep(data: any) {
-    console.log(data);
-    console.log('Chegando aqui');
+  function handleNextStep(data: AccountProps) {
+    updateFormData(data);
+    navigate('finish');
   }
 
   function validationPasswordConfirmation(passwordConfirmation: string) {
@@ -24,6 +30,7 @@ export function FormStepThree() {
 
   return (
     <View style={sytles.container}>
+      <Progress progress={90} />
       <Text style={sytles.title}>
         Escolha sua senha
       </Text>

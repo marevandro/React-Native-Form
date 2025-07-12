@@ -1,24 +1,30 @@
 import { Text, TextInput, View } from "react-native";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
+import { Progress } from "../../components/Progress";
 import { useForm } from "react-hook-form";
 import { useRef } from "react";
 
 import { sytles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
+import { AccountProps } from "../../contexts/AccountFormContext";
+import { useAccountForm } from "../../hooks/useAccountForm";
 
 export function FormStepOne() {
+  const { updateFormData } = useAccountForm();
   const { navigate } = useNavigation();
-  const { control, handleSubmit, formState: { errors } } = useForm();
+  const { control, handleSubmit, formState: { errors } } = useForm<AccountProps>();
   const emailRef = useRef<TextInput>(null);
 
 
   function handleNextStep(data: any) {
+    updateFormData(data);
     navigate("formStepTwo")
   }
 
   return (
     <View style={sytles.container}>
+      <Progress progress={30}/>
       <Text style={sytles.title}>
         Criar sua conta
       </Text>
